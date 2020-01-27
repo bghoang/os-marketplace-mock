@@ -3,6 +3,36 @@ import { Card, Button } from "react-bootstrap";
 import "../css/projects.css";
 import axios from "axios";
 
+// Show all the projects that we can contribute
+/*
+const EachProject = props => {
+    return (
+      <Card style={{ className: "card", width: "20rem" }}>
+        <Card.Img variant="top" src={props.project.owner.avatar_url} />
+        <Card.Body>
+          <Card.Title> Project's Name: {props.project.name}</Card.Title>
+          <Card.Title>Owner: {props.project.owner.login}</Card.Title>
+          <Card.Text> Description: {props.project.description}</Card.Text>
+          <Button
+            variant="outlined"
+            color="primary"
+            href={props.project.html_url}
+          >
+            Check Project
+          </Button>
+        </Card.Body>
+      </Card>
+    );
+};
+
+// Method to show the EachProject component
+  showProject(projects) {
+    return projects.map(project => {
+      return <EachProject project={project} key={project.id} />;
+    });
+  }
+*/
+
 class Project extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +44,7 @@ class Project extends React.Component {
   componentDidMount() {
     axios
       .get(
-        "https://api.github.com/repos/os-ucsd/os-ucsd.ucsd.edu/issues?q=is%3Aissue+state=closed"
+        "https://api.github.com/repos/bghoang/os-marketplace-mock/issues?state=closed"
       )
       .then(res => {
         console.log(res.data);
@@ -35,11 +65,8 @@ class Project extends React.Component {
               src={Object(Object(this.state.projects[0]).user).avatar_url}
             />
             <Card.Body>
-              <Card.Title>Card Title</Card.Title>
-              <Card.Text>
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </Card.Text>
+              <Card.Title>{Object(this.state.projects[0]).title}</Card.Title>
+              <Card.Text>{Object(this.state.projects[0]).body}</Card.Text>
               <Button variant="primary">Go somewhere</Button>
             </Card.Body>
           </Card>
