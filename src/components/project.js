@@ -4,34 +4,27 @@ import "../css/projects.css";
 import axios from "axios";
 
 // Show all the projects that we can contribute
-/*
 const EachProject = props => {
-    return (
-      <Card style={{ className: "card", width: "20rem" }}>
-        <Card.Img variant="top" src={props.project.owner.avatar_url} />
-        <Card.Body>
-          <Card.Title> Project's Name: {props.project.name}</Card.Title>
-          <Card.Title>Owner: {props.project.owner.login}</Card.Title>
-          <Card.Text> Description: {props.project.description}</Card.Text>
-          <Button
-            variant="outlined"
-            color="primary"
-            href={props.project.html_url}
-          >
-            Check Project
-          </Button>
-        </Card.Body>
-      </Card>
-    );
-};
+  //console.log(props.project.body.split("\n"));
 
-// Method to show the EachProject component
-  showProject(projects) {
-    return projects.map(project => {
-      return <EachProject project={project} key={project.id} />;
-    });
-  }
-*/
+  return (
+    <Card style={{ width: "20rem" }}>
+      <Card.Img variant="top" src={props.project.user.avatar_url} />
+      <Card.Body>
+        <Card.Title>{props.project.title}</Card.Title>
+        <Card.Text>{props.project.body.split("\n")[1]}</Card.Text>
+        <Button
+          variant="primary"
+          href={props.project.body
+            .split("\n")[2]
+            .substring(14, props.project.body.split("\n")[2].length)}
+        >
+          Go somewhere
+        </Button>
+      </Card.Body>
+    </Card>
+  );
+};
 
 class Project extends React.Component {
   constructor(props) {
@@ -53,23 +46,22 @@ class Project extends React.Component {
       .catch(err => console.log(err));
   }
 
+  showProject(projects) {
+    return projects.map(project => {
+      return <EachProject project={project} key={project.id} />;
+    });
+  }
+
   render() {
     return (
       <div>
-        {console.log(Object(Object(this.state.projects[0]).user).avatar_url)}
+        {/*console.log(Object(Object(this.state.projects[0]).user).avatar_url)*/}
         <h1>OS MARKETPLACE</h1>
-        <div className="projects">
-          <Card style={{ width: "18rem" }}>
-            <Card.Img
-              variant="top"
-              src={Object(Object(this.state.projects[0]).user).avatar_url}
-            />
-            <Card.Body>
-              <Card.Title>{Object(this.state.projects[0]).title}</Card.Title>
-              <Card.Text>{Object(this.state.projects[0]).body}</Card.Text>
-              <Button variant="primary">Go somewhere</Button>
-            </Card.Body>
-          </Card>
+        <div className="projects">{this.showProject(this.state.projects)}</div>
+        <div className="button">
+          <Button variant="primary" href="/form">
+            Share Project
+          </Button>
         </div>
       </div>
     );

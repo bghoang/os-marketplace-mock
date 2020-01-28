@@ -5,8 +5,14 @@ h1 {
 }
 
 .projects {
-  display: block;
-  margin-left: 110px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 7%;
   margin-right: auto;
   width: fit-content;
+  margin-bottom: 10px;
+}
+
+.button {
+  padding-top: 30px;
 }
